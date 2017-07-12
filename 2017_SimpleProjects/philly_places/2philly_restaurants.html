@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--stylesheet imports-->
+    <link rel="stylesheet" href="leaflet.css" />
+  </head>
+  <body>
+
+    <!--left panel-->
+    <div style="display: block;overflow: auto; position: absolute; left: 0px; width: 440px; top: 0; bottom: 0;" data-bottom="false">
+      <img src="http://thehub.com/wp-content/uploads/2013/07/CityView.jpg" width="380" style="margin:10px">
+      <h2 style="position:relative;left:25px;">Great Restaurants in Philly</h2>
+      <h3 style="position:absolute; left:20px; color:orange"> #1: <br/>The Vietnam Restaurant</h3>
+      <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/0a/96/cf/pho-vietnam-restaurant.jpg" alt="" width="380" style="margin:10px">
+      <h3 style="position:absolute; left:20px; color:orange" >#2: <br/>The Philadelphia Cheesesteak</h3>
+      <img src="http://photos.visitphilly.com/shanks-original-cheesesteak-philadelphia1-920vp.jpg" alt="" width="380" style="margin:10px">
+      <h3 style="position:absolute; left:20px; color:orange">#3: <br/>The Sabrina Cafe</h3>
+      <img src="https://media-cdn.tripadvisor.com/media/photo-s/02/71/8b/fc/sabrina-s-cafe-spencer.jpg" alt="" width="380" style="margin:10px">
+      <h3 style="position:absolute; left:20px; color:orange">#3: <br/>The Jane G's</h3>
+      <img src="http://janegsrestaurant.com/img/gallery/07.jpg" alt="" width="380" style="margin:10px">
+    </div>
+    <!--map-->
+    <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;"></div>
+
+
+    <!--javascript imports-->
+    <script src="leaflet.js"></script>
+
+    <script>
+
+    /* =====================
+
+    # Lab 1, Part 3 — Array Access
+
+    ## Introduction
+
+    Refactor your week 1 homework assignment to leverage some of the Javascript
+    functionality we have been learning about. We will start by improving the
+    way we store data and the amount of times we call the L.marker method.
+
+    ## Task 1: Data Storage
+
+    Let's consider a marker for a single restaurant point location. We could
+    store information about that marker as an array
+    ([element1, element2, element3...]). Your point location array should
+    contain the following three elements in this order: 1. lat, 2. lng, 3. label.
+
+    Create an array of arrays (an array that contains multiple arrays) to
+    represent every restaurant in your restaurant data. Save this as variable
+    "restaurantData".
+
+    ## Task 2: Process Data
+
+    Create a marker for each element in "restaurantData". Your final code should
+    only include "L.marker" one time.
+
+    ## Task 3: Add Two Additional Markers
+
+    Add two additional restaurants to your data. You should only need to modify
+    "restaurantData" to do this. Confirm that these new markers are added to
+    your application.
+
+    ## Task 4: Add Popups to Markers
+
+    Add popups to your markers. The popup should contain the label for your
+    restaurant. Refer to the Leaflet documentation for instructions on adding
+    a popup: http://leafletjs.com/reference.html#popup
+
+
+    ===================== */
+    var restaurantData = [[39.9563,-75.1572,'Vietnam Restaurant', 'https://media-cdn.tripadvisor.com/media/photo-s/03/0a/96/cf/pho-vietnam-restaurant.jpg'],
+    [39.9415, -75.1493,'PhillyCheasteak','http://photos.visitphilly.com/shanks-original-cheesesteak-philadelphia1-920vp.jpg'],
+    [39.9599, -75.1906,'Sabrina','https://media-cdn.tripadvisor.com/media/photo-s/02/71/8b/fc/sabrina-s-cafe-spencer.jpg'],
+    [39.955769, -75.201655,'Jane G','http://janegsrestaurant.com/img/gallery/07.jpg']];
+    var map = L.map('map', {
+      center: [39.9522, -75.1639],
+      zoom: 14
+    });
+
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map);
+
+    // var j = 0;
+    for (i=0;i<5;i++){
+    L.marker([restaurantData[i][0],restaurantData[i][1]]).bindPopup(restaurantData[i][2] + "<img src=" + restaurantData[i][3] + ">").addTo(map);
+    }
+
+
+//method 1 NOT WORKING!
+// _.map(restaurantData,function(item){
+//   console.log("111");
+//         return L.marker([item[0],item[1]]).addTo(map);
+//       })
+
+
+//method 2 NOT WORKING!
+    // var makeMarkers = function(array){
+    //   return _.map(array,function(item){
+    //     return L.marker([item[0],item[1]]).addTo(map);
+    //   })
+    // };
+    //
+    // makeMarkers(restaurantData);
+
+    /* =====================
+
+    Start code
+
+    ===================== */
+
+    L.marker([0, 0]).addTo(map);
+    L.marker([0, 0]).addTo(map);
+    L.marker([0, 0]).addTo(map);
+
+    /* =====================
+
+    End code
+
+    ===================== */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+create json object: jsonstringify
+
+
+
+0331
+load an library: CDN HTTP add to the map
+
+cdn
+
+Developer tools
+MDN
+
+
+cartoDB SQL:
+ILIKE: where it starts with the word ""
+
+CartoDB at least needs two columns: cartodb.id, and the_geom
+
+
+:: transform data type -- from geometry to geography (and project it with coordinate system)
+
+
+stackoverflow - the best reference
+
+
+
+
+
+0407
+problems with raster:
+1. too large area can't store all the data
+you need to zoom in to a small area of raster
+
+
+QGIS
+
+PostGIS
+
+2. don't try too complicated operations
+
+
+Final Project:
+1. drop a marker
+2. input a coorinates
+
+
+get lat&lon from a point you drop there.

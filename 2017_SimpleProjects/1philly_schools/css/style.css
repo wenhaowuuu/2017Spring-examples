@@ -1,0 +1,106 @@
+body {
+    padding: 0;
+    overflow: hidden;
+    font-family: helvetica, arial, sans-serif;
+}
+
+.map {
+    position: absolute;
+    top:70px;
+    right: 0px;
+    left: 340px;
+    height: 100%;
+}
+
+.topbar {
+  position:absolute;
+  top:0;
+  width:100%;
+  height:70px;
+  background-color: #F09085;
+  z-index: 10;
+
+}
+.sidebar {
+    position: absolute;
+    left: 0px;
+    width: 340px;
+    top: 70px;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.sidebox{
+  position:relative;
+  width:290px;
+  margin-top: 15px;
+  padding:10px;
+  left:0;
+  background-color: #F09085;
+  color:white;
+}
+
+
+
+.whiteline{
+  background-color:#b2b2b2;
+  height:2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#button {
+  float:right;
+  font-weight:bold;
+  font-size:0.8em;
+}
+#button1{
+  background-color: blue;
+  height:10px;
+  display:inline-block;
+}
+
+#inputname{
+  border-width:thin;
+  border-style:groove;
+}
+#inputgrade{
+  border-width:thin;
+  border-style:groove;
+}
+
+br1{
+  height:1em;
+}
+
+br2{
+  height:0.5em;
+
+}
+
+
+.h1 {
+  color:white;
+  font-weight: bold;
+  font-family: Anonymous Pro;
+  left:25px;
+  margin:15px;
+}
+
+.name{
+  color:black;
+  font-size:16px;
+  font-style: normal;
+}
+
+.address{
+  color:black;
+  font-size:15px;
+  font-family: sans-serif;
+}
+
+
+.schooltype{
+  color:white;
+}

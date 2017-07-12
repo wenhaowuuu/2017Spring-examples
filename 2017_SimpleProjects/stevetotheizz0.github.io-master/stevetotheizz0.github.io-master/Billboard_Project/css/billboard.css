@@ -1,0 +1,66 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  padding-top: 100px;
+}
+
+.map{
+  margin-left: 0px;
+  position: relative;
+  min-height: 100%;
+}
+
+.navbar-default{
+  background-color: white;
+}
+
+.scroll {
+  margin-right: 0px;
+  overflow-y: scroll;
+  position: relative;
+  min-height: 100%;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+@me
+
+#fourth{
+  padding-bottom: 350px;
+}
+
+table{
+  table-layout: fixed;
+  font-size: 12px;
+  position: relative;
+  top: 5%;
+
+}
+
+.legend {
+  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  background-color: #fff;
+  z-index: 2000;
+  right: 10px;
+  /*width: 110px;*/
+  bottom: 20px;
+  /*bottom: 420px;*/
+  overflow-y: hidden;
+  padding: 10px;
+}
+
+.colorKey {
+  width:20px;
+  height:20px;
+
+}

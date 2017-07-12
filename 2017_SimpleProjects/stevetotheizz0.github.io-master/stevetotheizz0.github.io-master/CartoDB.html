@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css" />
+    <link href="css/agency.css" rel="stylesheet">
+    <link rel="stylesheet" href="CartoDB/css/reset.css" />
+    <link rel="stylesheet" href="CartoDB/css/style.css" />
+  </head>
+  <body id="page-top" class="index">
+
+      <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html">Stephen Skilton</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Sidebar -->
+    <div id="modal">
+        <div class="modalconent">
+
+            <p>This page uses Turf.js, CartoDB's API layers, some Postgres querying through CartoDB's API, and Leaflet's draw functions. Click on the pin tool and drop a pin anywhere on the map to show data for the closet 5 points in the sidebar. Or use the box tool to find data for all of the points within a custom area</p>
+            <p>The points visualized are Flickr data that was made available by <a href="https://www.flickr.com/photos/walkingsf/sets/72157623971287575/">Eric Fisher</a>. Eric provided datasets for over 50 cities of every Flickr Photo taken over a period of five years. During my time as a research assistant for a Historic Preservation non-profit, I created this visusalization to show which photos in NYC were taken within a Historic Districts. (See Map Legend)</p>
+            <p>When you drop a pin or draw a box, the map will grab all of the data available from Eric's dataset about the photos nearby. The link for each record will take you over to the user's Flickr account for that photo. I also added the ability to filter the data by year by using the dropdown box in the sidebar.</p>
+        </div>
+    </div>
+    <div class="sidebar">
+      <h1>Flickr Photos in NYC</h1>
+      <p>Choose from the dropdown below to filter on a selected year.</p>
+      <p>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Year
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">2000</a></li>
+            <li><a href="#">2007</a></li>
+            <li><a href="#">2008</a></li>
+            <li><a href="#">2009</a></li>
+            <li><a href="#">2010</a></li>
+          </ul>
+        </div>
+      </p>
+      <div class="container-fluid">
+        <ul id="project-list" class="list-group">
+        </ul>
+      </div>
+    </div>
+    <!-- Map -->
+    <div id="map" class="map"></div>
+
+    <!-- Javascript Imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"></script>
+    <script src="CartoDB/js/funcs.js"></script>
+    <script src="CartoDB/js/setup.js"></script>
+  </body>
+</html>

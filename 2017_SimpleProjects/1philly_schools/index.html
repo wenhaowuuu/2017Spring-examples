@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <!-- =====================
+    Edit css/style.css
+    ====================== -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <!-- =====================
+
+    # Week 3 - Assignment
+
+    ## Introduction
+
+    We've got some interesting school data that we're working with. In addition to displaying it on the map, we also want to show it in a list. Notice that our project has an element, .sidebar, that contains no content. We are going to fill it with filtering functionality and a list of schools.
+
+    ## Build components with HTML and CSS
+
+    Take a look at the image assignment-screen.png. Add HTML inside of the element <div class="sidebar"></div> and add CSS inside the file css/style.css to recreate this content in the browser. You do not need to create the list of schools dynamically using the data—just hardcode three schools (in a future assignment, we will generate the list with the same data that we use to generate markers on our map!).
+
+    Start by trying to make it look as much like the image as possible.
+
+    ## Make it look cool
+
+    Try changing the colors or spacing. Make it look a little different. There is no right answer here: just try something and make it your own. Take a look at neat websites on https://www.typewolf.com/ or http://www.awwwards.com/ for color or styling inspiration.
+
+    ====================== -->
+
+    <!-- Sidebar -->
+    <div class="topbar"><h1 class="h1">PHILADELPHIA SCHOOLS by ENROLLMENT SIZE</h1></div>
+    <div class="sidebar">
+      <h2><strong>Filters</strong></h2>
+        <button id="button">Hide Filters</button>
+        <h3> By Name </h3>
+          <input id="inputname" type="text">
+        <h3> By Grade </h3>
+        <div class="scrolldown">
+          <input id="inputgrade" type="number">
+          <button1> All Grades</button1></div>
+      <div class = "whiteline"></div>
+
+      <h2><strong>Schools</strong></h2>
+      <div class="sidebox">
+        <p class="name">Henry, Charles W.</br><span class="schooltype">Elem/Middle</span></p>
+        <p class="address">601 Carpernter La.</br>19119 - 3405</p>
+      </div>
+      <div class="sidebox">
+        <p class="name">Universal Creighton Charter School</br><span class="schooltype">Elem/Middle</span></p>
+        <p class="address">5401 Tabor Ave</br>19120 - 3614</p>
+      </div>
+      <div class="sidebox">
+        <p class="name">Marshall, Jhon</br><span class="schooltype">Elem/Middle</span></p>
+        <p class="address">601 Carpernter La.</br>19119 - 3405</p>
+      </div>
+      <div class="sidebox">
+        <p class="name">Henry, Charles W.</br><span class="schooltype">Elem/Middle</span></p>
+        <p class="address">601 Carpernter La.</br>19119 - 3405</p>
+      </div>
+      <!-- =====================
+      Add HTML
+      ====================== -->
+
+    </div>
+    <!-- Map -->
+    <div id="map" class="map"></div>
+
+    <!-- Javascript Imports -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="phillySchools.js"></script>
+
+    <!-- Javascript Code -->
+    <script>
+      var map = L.map('map', {
+        center: [39.9522, -75.1639],
+        zoom: 14
+      });
+
+      //WHITE MAP
+      var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      	subdomains: 'abcd',
+      	minZoom: 0,
+      	maxZoom: 20,
+      	ext: 'png'
+      }).addTo(map);
+
+      //DARK MAP
+      // var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
+      //   maxZoom: 18,
+      //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+      //   subdomains: 'abcd'
+      // }).addTo(map);
+
+
+      console.log("test");
+      // clean data
+    var data = schools;
+    _.each(data,function(item){
+      if (item.ZIPCODE=='string'){
+        split = item.ZIPCODE.split(' ');
+        var numberzip = parseInt(split[0]);
+         item.ZIPCODE = numberzip;
+      }
+    });
+
+    console.log("test1");
+    //reclassify the data
+      _.each(data,function(item){
+        if (typeof item.GRADE_ORG === 'number') {  // if number
+          item.HAS_KINDERGARTEN = item.GRADE_LEVEL < 1;
+          item.HAS_ELEMENTARY = 1 < item.GRADE_LEVEL < 6;
+          item.HAS_MIDDLE_SCHOOL = 5 < item.GRADE_LEVEL < 9;
+          item.HAS_HIGH_SCHOOL = 8 < item.GRADE_LEVEL < 13;
+        } else {  // otherwise (in case of string)
+          item.HAS_KINDERGARTEN = item.GRADE_LEVEL.toUpperCase().indexOf('K') >= 0;
+          item.HAS_ELEMENTARY = item.GRADE_LEVEL.toUpperCase().indexOf('ELEM') >= 0;
+          item.HAS_MIDDLE_SCHOOL = item.GRADE_LEVEL.toUpperCase().indexOf('MID') >= 0;
+          item.HAS_HIGH_SCHOOL = item.GRADE_LEVEL.toUpperCase().indexOf('HIGH') >= 0;
+        }
+    });
+    console.log("test2");
+    console.log(data);
+    _.each(data,function(item){
+      L.circleMarker([item.Y,item.X]).addTo(map).bindPopup(item.FACILNAME_LABEL);
+    });
+
+
+  // filter data
+  var acceptedZipcodes = [19106, 19107, 19124, 19111, 19118];
+  var minEnrollment = 300;
+  var filtered_data = [];
+  var filtered_out = [];
+  console.log("test3");
+  _.each(data,function(item1){
+    isOpen = item1.ACTIVE.toUpperCase() == 'OPEN';
+    isPublic = (item1.TYPE.toUpperCase() !== 'CHARTER' &&
+                item1.TYPE.toUpperCase() !== 'PRIVATE');
+    isSchool = (item1.HAS_KINDERGARTEN ||
+                item1.HAS_ELEMENTARY ||
+                item1.HAS_MIDDLE_SCHOOL ||
+                item1.HAS_HIGH_SCHOOL);
+
+    meetsMinimumEnrollment = item1.ENROLLMENT > minEnrollment;
+
+    meetsZipCondition = acceptedZipcodes.indexOf(item1.ZIPCODE) >= 0;
+
+
+    //CONSTRUCT FILTERING CONDITIONS
+    filter_condition = (isOpen &&
+                        isSchool &&
+                        meetsMinimumEnrollment &&
+                        !meetsZipCondition);
+    if (filter_condition) {
+      filtered_data.push(item1);
+    } else {filtered_out.push(item1);
+    }
+  });
+  console.log("test4");
+  console.log('Included:', filtered_data.length);
+  console.log('Excluded:', filtered_out.length);
+
+  // main loop
+  _.each(filtered_data,function(item2){
+      var color;
+      // Constructing the styling  options for our map
+      if (item2.HAS_HIGH_SCHOOL){
+        color = '#ec3b1f';
+      } else if (item2.HAS_MIDDLE_SCHOOL) {
+        color = '#ea7d0f';
+      } else {
+        color = '#07d226';
+      }
+      // The style options
+      var pathOpts = {'radius': item2.ENROLLMENT / 30,
+                      'fillColor': color};
+      L.circleMarker([item2.Y, item2.X], pathOpts)
+        .bindPopup(item2.FACILNAME_LABEL)
+        .addTo(map);
+    });
+
+    </script>
+
+  </body>
+</html>

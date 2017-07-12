@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--stylesheet imports-->
+    <link rel="stylesheet" href="leaflet.css" />
+  </head>
+  <body>
+    <!--left panel-->
+    <div style="position:absolute;left:0px;width:400px">
+      <img src="http://thehub.com/wp-content/uploads/2013/07/CityView.jpg" width="380" style="margin:10px">
+      <h2 style="position:relative;left:25px;">Health Centers in Philly</h2>
+      <br>
+      </br>
+      <div style="position:relative;width:400px;margin:15px;">
+        <img src="https://image.ibb.co/g5s8sk/dental_2.png" style="vertical-align:middle; height:50px;margin:15px;">
+        <span>health centers with dental service</span>
+      </div>
+
+    </div>
+    <!--map-->
+    <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;">
+    </div>
+
+    <!--javascript imports-->
+    <script src="leaflet.js"></script>
+    <script src="health_centers.js"></script>
+
+    <!--Your code starts here-->
+    <script>
+    var map = L.map('map', {
+      center: [39.9522, -75.1639],
+      zoom: 13
+    });
+
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map);
+
+      /* =====================
+
+      # Week 2 - Assignment
+
+      ## Introduction
+
+       This week's assignment as having two separate parts:
+
+       1. Log a series of arrays to the console that represents the health_centers dataset in array form. For example, [{'first': 1, 'second': 44}, {'first': 2, 'second': 12}] becomes [['first','second'],[1, 44],[2, 12]]
+
+       2. Put a marker on the map for each health center in the specified lat/lng coordinates with a popup (a simple text dialog) that shows that location's name when its marker is clicked.
+
+       EXTRA: Some of these locations offer dental services as well. Can you find some way to give dental locations a different icon? (Here's some relevant documentation: http://leafletjs.com/reference.html#icon)
+
+       Remember: functions are meant to facilitate code comprehension and reuse. Try to use them to organize your code.
+      ===================== */
+
+
+      /* =====================
+
+      Start code
+
+      ===================== */
+      var jsonToCsv = function(json) {
+        console.log(json);
+        var CSV = [['LNG','LAT','OBJECTID','NAME','ORGANIZATION','ZIP','PHONE','WEBSITE','DENTAL_PHONE','FULL_ADDRESS']];
+        for(i=0;i<json.length;i++){
+          CSV.push([json[i].LNG,json[i].LAT,json[i].OBJECTID,json[i].NAME,json[i].ORGANIZATION,json[i].ZIP,json[i].PHONE,json[i].WEBSITE,json[i].DENTAL_PHONE,json[i].FULL_ADDRESS])
+        }
+        console.log(CSV);
+      };
+
+
+      // var addMarkers = function(map) {
+      //   for (i=1;i<healthCenters.length;i++){
+      //     if(healthCenters[i][5]<=19149 && healthCenters[i][5]>=19140 ){
+      //       L.marker([healthCenters[i][1],healthCenters[i][0]]).bindPopup(healthCenters[i][3]).addTo(map);
+      //     }
+      //   };
+      // }
+      console.log(healthCenters);
+      //DATA TYPE REALLY MATTERS!!!//
+      //ARRAY - OBJECT - PROPERTY NAME!!!//
+
+      var addMarkers = function(map) {
+        for (i=1;i<healthCenters.length;i++){
+            L.circleMarker([healthCenters[i].LAT,healthCenters[i].LNG]).bindPopup(healthCenters[i].NAME + " is located at " + "</br>" + "<strong>" + healthCenters[i].FULL_ADDRESS + "</strong>").addTo(map);
+        };
+      }
+
+
+      var icon1 = L.icon({
+          iconUrl:'dental_1.png',
+          iconRetinaUrl:'dental_2.png',
+          iconSize:[45,45],
+          // iconAnchor:[22,94],
+          popupAnchor:[-3,-76],
+          shadowUrl:'marker-shadow.png',
+          shadowSize:[68,95],
+          // shadowAnchor:[22,94]
+      });
+
+      var addDentalMarkers = function(map){
+        for (i=1;i<healthCenters.length;i++){
+          // console.log(healthCenters[i].DENTAL_PHONE=="N/A");
+          if(healthCenters[i].DENTAL_PHONE!="N/A"){
+            L.marker([healthCenters[i].LAT,healthCenters[i].LNG],{icon:icon1}).bindPopup(healthCenters[i].NAME + " is located at " + "</br>" + "<strong>" + healthCenters[i].FULL_ADDRESS + "</strong>").addTo(map);
+          }
+        };
+      }
+
+      jsonToCsv(healthCenters);
+      console.log("function1");
+      addMarkers(map);
+      console.log("function2");
+      addDentalMarkers(map);
+      // console.log("function3");
+
+
+      //run the data conversion function
+
+    </script>
+    <!--Your code ends here-->
+  </body>
+</html>
