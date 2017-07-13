@@ -1,0 +1,212 @@
+body {
+    padding: 0;
+    overflow: hidden;
+    font-family: helvetica, arial, sans-serif;
+}
+
+.row {
+  position:relative;
+  left:340px;
+  margin: 0;
+}
+
+.large-column {
+  width: 80%;
+  float: right;
+  padding: 20px;
+}
+
+.map {
+    /*position: absolute;*/
+    /*top:60px;*/
+    /*right: 0px;*/
+    /*float:right;*/
+    /*left: 340px;*/
+    /*width:30%;*/
+    /*padding:20px;*/
+    /*width: 25%;
+    float: left;
+    padding: 20px;*/
+}
+
+#map1 {
+  position: relative;
+  height:150px;
+}
+
+#map2 {
+  position:relative;
+  height:150px;
+
+}
+
+#map3 {
+  height:150px;
+
+}
+
+#map4 {
+  position:relative;
+  right:0;
+  top:10px;
+  height:210px;
+}
+
+#map5 {
+  position:relative;
+  right:0;
+  top:10px;
+  height:210px;
+}
+
+
+#map6 {
+  position:relative;
+  top:10px;
+  height:450px;
+}
+
+
+.column-one-half, .column-two-quarters {
+  position:relative;
+  top: 35px;
+  width: 51%;
+  padding: 10px;
+  margin: 15px;
+}
+
+.column-one-quarter {
+  position: relative;
+  top:20px;
+  background-color: #FFFFFF;
+  width: 25%;
+  height:160px;
+  float: left;
+  padding: 8px;
+  margin:8px;
+  /*z-index: 50;*/
+}
+
+.column-vertical {
+  position: absolute;
+  right: 0;
+  width:25%;
+  top: 210px;
+  right: 8px;
+}
+
+.row-right {
+  position: relative;
+  top:25px;
+  background-color: #FFFFFF;
+  width: 380px;
+  height:200px;
+  float: left;
+  padding: 8px;
+  margin:8px;
+  /*z-index: 50;*/
+}
+
+
+.map-title {
+  font-size:14px;
+}
+
+
+.topbar {
+  position:absolute;
+  top:0;
+  width:100%;
+  height:40px;
+  background-color: #F09085;
+  z-index: 10;
+
+}
+.sidebar {
+    position: absolute;
+    left: 0px;
+    width: 340px;
+    top: 40px;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.sidebox{
+  position:relative;
+  width:290px;
+  margin-top: 15px;
+  padding:10px;
+  left:0;
+  background-color: #F09085;
+  color:white;
+}
+
+.whiteline{
+  background-color:#b2b2b2;
+  height:2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#button {
+  float:right;
+  font-weight:bold;
+  font-size:0.8em;
+}
+#button1{
+  background-color: blue;
+  height:10px;
+  display:inline-block;
+}
+
+#inputname{
+  border-width:thin;
+  border-style:groove;
+}
+#inputgrade{
+  border-width:thin;
+  border-style:groove;
+}
+
+br1{
+  height:1em;
+}
+
+br2{
+  height:0.5em;
+
+}
+
+
+.h1 {
+  color:white;
+  font-weight: bold;
+  font-family:inherit;
+  font-size: 20px;
+  left:25px;
+  margin:15px;
+}
+
+.spantext{
+  color:#909090;
+  font-weight: lighter;
+  font-style: italic;
+  font-size:15px;
+}
+.name{
+  color:black;
+  font-size:16px;
+  font-style: normal;
+}
+
+.address{
+  color:black;
+  font-size:15px;
+  font-family: sans-serif;
+}
+
+
+.schooltype{
+  color:white;
+}

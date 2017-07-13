@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <!-- =====================
+    Edit css/style.css
+    ====================== -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <!-- =====================
+
+    ====================== -->
+
+    <!-- Sidebar -->
+    <div class="topbar"><h1 class="h1">GEODESIGN PLATFORM | WW</h1></div>
+    <div class="sidebar">
+      <p>
+        This platform is designed to provide data input and assist decision-making directly from community members in the design and planning process.
+      </br></br><span class="spantext">To know about the structure behind, <a href="https://en.wikipedia.org/wiki/Geodesign">click here</a></span>
+      </p>
+      <h2><strong>Your Weights</strong></h2>
+        <button id="button">Hide Filters</button>
+        <h3> NAME </h3>
+          <input id="inputname" type="text">
+        <h3> Factor A </h3>
+        <div class="scrolldown">
+          <input id="inputgrade" type="number">
+          <button1> number </button1>
+        </div>
+        <h3> Factor B </h3>
+        <div class="scrolldown">
+          <input id="inputgrade" type="number">
+          <button1> number </button1>
+        </div>
+        <h3> Factor C </h3>
+        <div class="scrolldown">
+          <input id="inputgrade" type="number">
+          <button1> number </button1>
+        </div>
+      <div class = "whiteline"></div>
+
+      <h2><strong>Combined Score</strong></h2>
+    </div>
+    <!-- Map -->
+    <div class="row">
+      <div class="column-one-quarter">
+        <span class="map-title">Administrative Boundaries</span>
+        <div id="map1"></div>
+
+      </div>
+      <div class="column-one-quarter">
+        <span class="map-title">Population</span>
+        <div id="map2"></div>
+      </div>
+      <div class="column-one-quarter">
+        <span class="map-title">Household Income</span>
+        <div id="map3"></div>
+      </div>
+
+      <div class="column-one-half">
+        <span class="map-title"><strong>Combined Result</strong></span>
+        <div id="map6"></div>
+      </div>
+    </div>
+    <div class="column-vertical">
+      <div class="row-right">
+        <span class="map-title">Natural Hazards</span>
+        <div id="map4"></div>
+      </div>
+      <div class="row-right">
+        <span class="map-title">Transportation Connection</span>
+        <div id="map5"></div>
+      </div>
+    </div>
+
+    <!-- Javascript Imports -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@2.0.8"
+    integrity="sha384-ze7rgny7/YGFxBlVgTBdOABNWe5V9BYjju/qwqJhCU8XJHtuEnRlbUpN5lXyY706"
+    crossorigin=""></script>
+    <!-- Javascript Code -->
+    <script>
+
+    ///LOAD ESRI MAPS BELOW///
+    //https://esri.github.io/esri-leaflet/examples/switching-basemaps.html
+
+
+
+    var map1 = L.map('map1', {
+      center: [39.9522, -75.1639],
+      zoom: 14
+    });
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map1);
+    //
+    //LOAD MAP2
+    var map2 = L.map('map2', {
+      center: [39.9522, -75.1639],
+      zoom: 12
+    });
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map2);
+
+    //LOAD MAP3
+    var map3 = L.map('map3', {
+      center: [39.9522, -75.1639],
+      zoom: 10
+    });
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map3);
+
+    //LOAD MAP4
+    var map4 = L.map('map4', {
+      center: [38.9522, -95.1639],
+      zoom: 3
+    });
+
+    var Stamen_TonerLite = L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map4);
+
+    //LOAD MAP5
+    var map5 = L.map('map5', {
+      center: [39.9522, -75.1639],
+      zoom: 6
+    });
+
+    var Stamen_TonerLite = L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map5);
+
+
+    //LOAD MAP7
+    var map6 = L.map('map6', {
+      center: [39.9522, -75.1639],
+      zoom: 12
+    });
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map6);
+
+    L.circleMarker([39.9522, -75.163]).addTo(map6);
+    L.circleMarker([39.9542, -75.173]).addTo(map6);
+    L.circleMarker([39.9222, -75.143]).addTo(map6);
+    L.circleMarker([39.8911, -75.191]).addTo(map6);
+
+
+    // L.marker([39.9222, -75.143],{}).addTo(map6);
+
+    </script>
+  </body>
+</html>
